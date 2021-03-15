@@ -28,7 +28,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User getUser(String name, String password) {
 		logger.info("Get user by name {1} and password {2}",name, password);
-		return userRepo.findByNameAndPassword(name, password);
+		User user = userRepo.findByNameAndPassword(name, password);
+		if(null==null) {
+			throw new CustomException(400, "username or password is invalid");
+		}
+		return user;
 	}
 
 	@Override
@@ -36,6 +40,9 @@ public class UserServiceImpl implements UserService{
 	public Integer transferFund(String fromAccount, String toAccount, Integer amount) {
 		User fromUser = userRepo.findByAccountNo(fromAccount);
 		User toUser = userRepo.findByAccountNo(toAccount);
+		if(null==fromUser && null==toUser) {
+			throw new CustomException(400, "please enter valid account.");
+		}
 		if(fromUser.getAmount()<amount) {
 			throw new CustomException(500, "Not suffiencient amount to transfer");
 		}
