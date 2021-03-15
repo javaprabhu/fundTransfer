@@ -15,8 +15,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 @Entity
 @Table(name="user")
 public class User {
@@ -26,17 +24,20 @@ public class User {
 	private Integer id;
 	@Column(length = 20)
 	@NotBlank(message = "Name is mandatory")
+	@NotNull(message = "Name is mandatory")
 	private String name;
 	@NotBlank(message = "password is mandatory")
-	@Size(min = 6,max=8)
+	@NotNull(message = "password is mandatory")
 	private String password;
 	@NotNull(message = "dob cannot be null")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dob;
 	@NotBlank(message = "address is mandatory")
+	@NotNull(message = "address is mandatory")
 	@Column(length = 50)
 	private String address;
 	@NotBlank(message = "Adhar No is mandatory")
+	@NotNull(message = "Adhar No is mandatory")
 	@Column(length = 10)
 	private String adharId;
 	

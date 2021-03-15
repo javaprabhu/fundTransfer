@@ -32,7 +32,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponse> handleOtherException(Exception c, WebRequest request){
 		
-		ErrorResponse er = new ErrorResponse(400, c.getCause());
+		ErrorResponse er = new ErrorResponse(400, c.getMessage());
 		return new ResponseEntity<>(er,HttpStatus.BAD_REQUEST);
 	}
 	
